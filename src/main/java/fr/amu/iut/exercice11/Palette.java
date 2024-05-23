@@ -1,6 +1,10 @@
-package fr.amu.iut.exercice1;
+package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +20,9 @@ import javafx.stage.Stage;
 
 @SuppressWarnings("Duplicates")
 public class Palette extends Application {
+
+    private IntegerProperty nbFois;
+    private StringProperty message;
 
     private int nbVert = 0;
     private int nbRouge = 0;
@@ -36,6 +43,10 @@ public class Palette extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        message = new SimpleStringProperty();
+        nbFois = new SimpleIntegerProperty(0);
+
         root = new BorderPane();
 
         texteDuHaut = new Label();
@@ -58,6 +69,21 @@ public class Palette extends Application {
         bleu = new Button("Bleu");
 
         /* VOTRE CODE ICI */
+        vert.setOnAction(event ->{nbFois.set(++nbVert);
+            message.set(vert.getText()+"choisi");
+            this.texteDuHaut.setText( vert.getText() + " choisi "+ nbVert +" fois ");
+            this.panneau.setStyle("-fx-background-color: #0F0");});
+
+        bleu.setOnAction(event ->{nbFois.set(++nbBleu);
+            message.set(bleu.getText()+"choisi");
+        this.texteDuHaut.setText( bleu.getText() + " choisi "+ nbBleu +" fois ");
+        this.panneau.setStyle("-fx-background-color: #00F");});
+
+        rouge.setOnAction(event ->{nbFois.set(++nbRouge);
+            message.set(rouge.getText()+"choisi");
+        this.texteDuHaut.setText( rouge.getText() + " choisi "+ nbRouge +" fois ");
+        this.panneau.setStyle("-fx-background-color: #F00");});
+
 
         boutons.getChildren().addAll(vert, rouge, bleu);
 
